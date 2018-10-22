@@ -4,6 +4,11 @@ import {Button, Container, Icon, Responsive, Segment, Sidebar, Menu} from "seman
 
 import HomepageHeading from '../HomepageHeading/HomepageHeading';
 
+
+import HomepageMenu from '../HomepageMenu/HomepageMenu';
+
+
+
 class MobileContainer extends Component {
   state = {}
 
@@ -23,14 +28,9 @@ class MobileContainer extends Component {
       <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>
         <Sidebar.Pushable>
           <Sidebar as={Menu} animation='uncover' inverted vertical visible={sidebarOpened}>
-            <Menu.Item as='a' active>
-              Home
-            </Menu.Item>
-            <Menu.Item as='a'>Work</Menu.Item>
-            <Menu.Item as='a'>Company</Menu.Item>
-            <Menu.Item as='a'>Careers</Menu.Item>
-            <Menu.Item as='a'>Log in</Menu.Item>
-            <Menu.Item as='a'>Sign Up</Menu.Item>
+
+            <HomepageMenu />
+
           </Sidebar>
 
           <Sidebar.Pusher
@@ -44,6 +44,8 @@ class MobileContainer extends Component {
               style={{ minHeight: 350, padding: '1em 0em' }}
               vertical
             >
+
+
               <Container>
                 <Menu inverted pointing secondary size='large'>
                   <Menu.Item onClick={this.handleToggle}>
@@ -59,6 +61,7 @@ class MobileContainer extends Component {
                   </Menu.Item>
                 </Menu>
               </Container>
+
               <HomepageHeading mobile />
             </Segment>
 

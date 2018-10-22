@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 
 import HomepageLayout from './components/HomepageLayout';
 
+import { BrowserRouter as Router } from "react-router-dom";
+
 class App extends Component {
   render() {
     return (
-      <HomepageLayout />
+      <Router>
+        <HomepageLayout />
+      </Router>
     );
   }
 }

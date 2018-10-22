@@ -1,16 +1,25 @@
 
 import React from 'react'
 
+import { Route } from "react-router-dom";
+
+
 import ResponsiveContainer from './HomepageContainer/ResponsiveContainer';
 
 import Home from './HomepageContent/Home/Home';
+
+import Public from "./HomepageContent/Public/Public";
+
+
 import HomepageFooter from './HomepageFooter/HomepageFooter';
 
 
 const HomepageLayout = () => (
   <ResponsiveContainer>
 
-    <Home/>
+    <Route exact path="/" component={Home} />
+
+    <Route path="/public" component={Public} />
 
     <HomepageFooter/>
 
