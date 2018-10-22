@@ -1,16 +1,16 @@
 
-import React, { Component } from 'react'
+import React from 'react'
 
 import ResponsiveContainer from './HomepageContainer/ResponsiveContainer';
 
-import HomepageContent from './HomepageContent/HomepageContent';
+import Home from './HomepageContent/Home/Home';
 import HomepageFooter from './HomepageFooter/HomepageFooter';
 
 
 const HomepageLayout = () => (
   <ResponsiveContainer>
 
-    <HomepageContent/>
+    <Home/>
 
     <HomepageFooter/>
 
