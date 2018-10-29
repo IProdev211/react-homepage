@@ -4,15 +4,14 @@ import {Button, Container, Icon, Responsive, Segment, Sidebar, Menu} from "seman
 
 import HomepageHeading from '../HomepageHeading/HomepageHeading';
 
-
 import HomepageMenu from '../HomepageMenu/HomepageMenu';
-
 
 
 class MobileContainer extends Component {
   state = {};
 
   componentDidUpdate(prevProps, prevState) {
+    //if (this.state.sidebarOpened === prevState.sidebarOpened)
     if (this.state.sidebarOpened === true && prevState.sidebarOpened === true)
       this.setState({ sidebarOpened: false });
   }
@@ -31,6 +30,7 @@ class MobileContainer extends Component {
     const { sidebarOpened } = this.state;
 
     return (
+
       <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>
         <Sidebar.Pushable>
           <Sidebar as={Menu} animation='push' inverted vertical visible={sidebarOpened}>
@@ -68,14 +68,12 @@ class MobileContainer extends Component {
                 </Menu>
               </Container>
 
-
-
               <HomepageHeading mobile />
-
 
             </Segment>
 
             {children}
+
           </Sidebar.Pusher>
         </Sidebar.Pushable>
       </Responsive>

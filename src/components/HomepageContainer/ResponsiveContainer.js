@@ -6,8 +6,8 @@ import MobileContainer from './MobileContainer';
 
 const ResponsiveContainer = ({children}) => (
   <div>
-    <DesktopContainer >{children}</DesktopContainer>
-    <MobileContainer >{children}</MobileContainer>
+    <DesktopContainer>{children}</DesktopContainer>
+    <MobileContainer>{children}</MobileContainer>
   </div>
 );
 
