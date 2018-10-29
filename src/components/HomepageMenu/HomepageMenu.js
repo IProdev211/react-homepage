@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Button, Container, Menu} from "semantic-ui-react";
+import {Container, Menu} from "semantic-ui-react";
 
 import {Link, withRouter} from "react-router-dom";
 
@@ -36,7 +36,7 @@ const HomepageMenu = withRouter(({fixed, desktop, location}) => (
       </Menu.Item>
     ) : (
       <div>
-        <Menu.Item as='a'>Log in</Menu.Item>
+        <Menu.Item as={Link} to='/login'>Log in</Menu.Item>
         <Menu.Item as='a'>Sign up</Menu.Item>
       </div>
     )}
