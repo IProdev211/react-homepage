@@ -1,15 +1,18 @@
-import {Button, Container, Menu} from "semantic-ui-react";
-import {Link} from "react-router-dom";
 import React from "react";
 
+import {Button, Container, Menu} from "semantic-ui-react";
 
-const HomepageMenu = ({fixed, desktop}) => (
+
+import {Link, withRouter} from "react-router-dom";
+
+
+
+const HomepageMenu = withRouter(({fixed, desktop, location}) => (
   <Container>
-    <Menu.Item as={Link} to="/" active>Home</Menu.Item>
-    <Menu.Item as={Link} to="/public">Public</Menu.Item>
+    <Menu.Item as={Link} to="/" active={location.pathname === '/'}>Home</Menu.Item>
+    <Menu.Item as={Link} to="/public" active={location.pathname === '/public'}>Public</Menu.Item>
 
-    <Menu.Item as='a'>Company</Menu.Item>
-    <Menu.Item as='a'>Careers</Menu.Item>
+    <Menu.Item as={Link} to="/protected" active={location.pathname === '/protected'}>Protected</Menu.Item>
 
     {desktop ? (
       <Menu.Item position='right'>
@@ -28,6 +31,6 @@ const HomepageMenu = ({fixed, desktop}) => (
     )}
 
   </Container>
-);
+));
 
 export default HomepageMenu;

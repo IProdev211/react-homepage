@@ -10,26 +10,32 @@ import HomepageMenu from '../HomepageMenu/HomepageMenu';
 
 
 class MobileContainer extends Component {
-  state = {}
+  state = {};
 
-  handlePusherClick = () => {
-    const { sidebarOpened } = this.state
-
-    if (sidebarOpened) this.setState({ sidebarOpened: false })
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.sidebarOpened === true && prevState.sidebarOpened === true)
+      this.setState({ sidebarOpened: false });
   }
 
-  handleToggle = () => this.setState({ sidebarOpened: !this.state.sidebarOpened })
+  handlePusherClick = () => {
+    const { sidebarOpened } = this.state;
+
+    if (sidebarOpened) this.setState({ sidebarOpened: false });
+  };
+
+  handleToggle = () => this.setState({ sidebarOpened: !this.state.sidebarOpened });
 
   render() {
-    const { children } = this.props
-    const { sidebarOpened } = this.state
+
+    const { children } = this.props;
+    const { sidebarOpened } = this.state;
 
     return (
       <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>
         <Sidebar.Pushable>
-          <Sidebar as={Menu} animation='uncover' inverted vertical visible={sidebarOpened}>
+          <Sidebar as={Menu} animation='push' inverted vertical visible={sidebarOpened}>
 
-            <HomepageMenu />
+            <HomepageMenu  />
 
           </Sidebar>
 
@@ -62,7 +68,11 @@ class MobileContainer extends Component {
                 </Menu>
               </Container>
 
+
+
               <HomepageHeading mobile />
+
+
             </Segment>
 
             {children}

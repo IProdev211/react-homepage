@@ -1,8 +1,8 @@
 import React from "react";
 
-import PublicContent1 from './PublicContent1';
-import PublicContent2 from './PublicContent2';
-import PublicContent3 from './PublicContent3';
+import PublicContent1 from "./PublicContent1";
+import PublicContent2 from "./PublicContent2";
+import PublicContent3 from "./PublicContent3";
 
 
 const Public = () => (

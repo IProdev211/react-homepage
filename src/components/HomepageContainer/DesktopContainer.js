@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {Button, Container, Responsive, Segment, Visibility, Menu} from "semantic-ui-react";
+import {Responsive, Segment, Visibility, Menu} from "semantic-ui-react";
 
 import HomepageHeading from '../HomepageHeading/HomepageHeading';
 
@@ -8,14 +8,14 @@ import HomepageMenu from '../HomepageMenu/HomepageMenu';
 
 
 class DesktopContainer extends Component {
-  state = {}
+  state = {};
 
-  hideFixedMenu = () => this.setState({ fixed: false })
-  showFixedMenu = () => this.setState({ fixed: true })
+  hideFixedMenu = () => this.setState({ fixed: false });
+  showFixedMenu = () => this.setState({ fixed: true });
 
   render() {
-    const { children } = this.props
-    const { fixed } = this.state
+    const { children } = this.props;
+    const { fixed } = this.state;
 
     return (
       <Responsive minWidth={Responsive.onlyTablet.minWidth}>

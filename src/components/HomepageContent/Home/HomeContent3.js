@@ -1,7 +1,7 @@
 import React from "react";
 
 
-import {Button, Header, Image, Segment, Grid, Container, Divider} from "semantic-ui-react";
+import {Button, Header, Segment, Container, Divider} from "semantic-ui-react";
 
 
 const HomeContent3 = () => (
@@ -25,7 +25,7 @@ const HomeContent3 = () => (
         horizontal
         style={{ margin: '3em 0em', textTransform: 'uppercase' }}
       >
-        <a href='#'>Case Studies</a>
+        <a href='./#'>Case Studies</a>
       </Divider>
 
       <Header as='h3' style={{ fontSize: '2em' }}>

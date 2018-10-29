@@ -1,7 +1,7 @@
 import React from "react";
 
 
-import {Button, Header, Image, Segment, Grid} from "semantic-ui-react";
+import {Header, Image, Segment, Grid} from "semantic-ui-react";
 
 
 const PublicContent2 = () => (
