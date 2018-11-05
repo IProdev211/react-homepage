@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 
-import {Button, Container, Icon, Responsive, Segment, Sidebar, Menu} from "semantic-ui-react";
+import {Container, Icon, Responsive, Segment, Sidebar, Menu} from "semantic-ui-react";
 
 import HomepageHeading from '../HomepageHeading/HomepageHeading';
 
 import HomepageMenu from '../HomepageMenu/HomepageMenu';
 
+import AuthButton from '../HomepageMenu/AuthButton';
 
 class MobileContainer extends Component {
   state = {};
@@ -57,14 +58,21 @@ class MobileContainer extends Component {
                   <Menu.Item onClick={this.handleToggle}>
                     <Icon name='sidebar' />
                   </Menu.Item>
+
                   <Menu.Item position='right'>
-                    <Button as='a' inverted>
+
+                    <AuthButton/>
+
+                    {/*                    <Button as='a' inverted>
                       Log in
                     </Button>
                     <Button as='a' inverted style={{ marginLeft: '0.5em' }}>
                       Sign Up
                     </Button>
+                    */}
+
                   </Menu.Item>
+
                 </Menu>
               </Container>
 

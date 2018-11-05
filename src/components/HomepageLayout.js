@@ -13,6 +13,8 @@ import Login from "./HomepageContent/Login/Login";
 
 import HomepageFooter from './HomepageFooter/HomepageFooter';
 
+import PrivateRoute from '../service/PrivateRoute';
+
 
 const HomepageLayout = () => (
   <ResponsiveContainer>
@@ -21,9 +23,11 @@ const HomepageLayout = () => (
 
     <Route path="/public" component={Public} />
 
-    <Route path="/protected" component={Protected} />
-
     <Route path="/login" component={Login} />
+
+
+
+    <PrivateRoute path="/protected" component={Protected} />
 
 
 
