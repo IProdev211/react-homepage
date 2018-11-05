@@ -1,5 +1,7 @@
 import React from "react";
 
+import PropTypes from 'prop-types';
+
 import {Container, Menu} from "semantic-ui-react";
 
 import {Link, withRouter} from "react-router-dom";
@@ -19,20 +21,6 @@ const HomepageMenu = withRouter(({fixed, desktop, location}) => (
 
         <AuthButton fixed={fixed} />
 
-        {/*
-
-        <Button as='a' inverted={!fixed}>
-          Log in
-        </Button>
-        <Button as='a' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
-          Sign Up
-        </Button>
-
-
-        */}
-
-
-
       </Menu.Item>
     ) : (
       <div>
@@ -45,5 +33,10 @@ const HomepageMenu = withRouter(({fixed, desktop, location}) => (
 
   </Container>
 ));
+
+HomepageMenu.propTypes = {
+  fixed: PropTypes.bool,
+  desktop: PropTypes.bool
+};
 
 export default HomepageMenu;

@@ -1,5 +1,7 @@
 import React from "react";
 
+import PropTypes from 'prop-types';
+
 import {Button, Container, Header, Icon} from "semantic-ui-react";
 
 
@@ -12,6 +14,8 @@ const HomepageHeading = withRouter(({ mobile, location }) => {
     case '/protected':
     case '/login':
       return null;
+    default:
+      break;
   }
 
   return (
@@ -45,5 +49,10 @@ const HomepageHeading = withRouter(({ mobile, location }) => {
   )
 
 });
+
+HomepageHeading.propTypes = {
+  mobile: PropTypes.bool
+};
+
 
 export default HomepageHeading;

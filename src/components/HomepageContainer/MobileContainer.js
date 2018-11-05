@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 import {Container, Icon, Responsive, Segment, Sidebar, Menu} from "semantic-ui-react";
 
 import HomepageHeading from '../HomepageHeading/HomepageHeading';
@@ -33,7 +35,7 @@ class MobileContainer extends Component {
         <Sidebar.Pushable>
           <Sidebar as={Menu} animation='push' inverted vertical visible={sidebarOpened}>
 
-            <HomepageMenu  />
+            <HomepageMenu />
 
           </Sidebar>
 
@@ -77,5 +79,9 @@ class MobileContainer extends Component {
     )
   }
 }
+
+MobileContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default MobileContainer;

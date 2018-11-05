@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 import {Responsive, Segment, Visibility, Menu} from "semantic-ui-react";
 
 import HomepageHeading from '../HomepageHeading/HomepageHeading';
@@ -38,7 +40,7 @@ class DesktopContainer extends Component {
               size='large'
             >
 
-            <HomepageMenu fixed={fixed} desktop={true} />
+            <HomepageMenu fixed={fixed} desktop />
 
             </Menu>
             <HomepageHeading />
@@ -50,5 +52,9 @@ class DesktopContainer extends Component {
     )
   }
 }
+
+DesktopContainer.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
 export default DesktopContainer;
