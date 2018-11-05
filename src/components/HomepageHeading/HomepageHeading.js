@@ -7,7 +7,13 @@ import {withRouter} from "react-router-dom";
 
 
 const HomepageHeading = withRouter(({ mobile, location }) => {
-  if (location.pathname === '/protected') return null;
+
+  switch (location.pathname) {
+    case '/protected':
+    case '/login':
+      return null;
+  }
+
   return (
     <Container text>
       <Header
