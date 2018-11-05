@@ -12,15 +12,12 @@ class MobileContainer extends Component {
   state = {};
 
   componentDidUpdate(prevProps, prevState) {
-    //if (this.state.sidebarOpened === prevState.sidebarOpened)
-    if (this.state.sidebarOpened === true && prevState.sidebarOpened === true)
+    if (this.state.sidebarOpened && prevState.sidebarOpened)
       this.setState({ sidebarOpened: false });
   }
 
   handlePusherClick = () => {
-    const { sidebarOpened } = this.state;
-
-    if (sidebarOpened) this.setState({ sidebarOpened: false });
+    if (this.state.sidebarOpened) this.setState({ sidebarOpened: false });
   };
 
   handleToggle = () => this.setState({ sidebarOpened: !this.state.sidebarOpened });

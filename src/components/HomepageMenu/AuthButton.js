@@ -16,7 +16,7 @@ class AuthButton extends Component {
       (fakeAuth.isAuthenticated) ? (
       <div>
 
-        <span style={{ marginRight: '0.5em'}}>Welcome...</span>
+        <span style={{ marginRight: '0.5em' }}>Welcome...</span>
 
         <Button as='a' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}
                 onClick={() => fakeAuth.signout(() => history.push('/') )}>
