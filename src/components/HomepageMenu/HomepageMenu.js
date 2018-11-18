@@ -4,11 +4,36 @@ import PropTypes from 'prop-types';
 
 import {Container, Menu} from "semantic-ui-react";
 
-import {Link, withRouter} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 import AuthButton from './AuthButton';
 
 
+const HomepageMenu = ({fixed, desktop, location}) => (
+    <Container>
+        <Menu.Item as={Link} to="/" active={location.pathname === '/'}>Home</Menu.Item>
+        <Menu.Item as={Link} to="/public" active={location.pathname === '/public'}>Public</Menu.Item>
+
+        <Menu.Item as={Link} to="/protected" active={location.pathname === '/protected'}>Protected</Menu.Item>
+
+        {desktop ? (
+            <Menu.Item position='right'>
+                <AuthButton fixed={fixed} />
+            </Menu.Item>
+        ) : (
+            <div>
+                <Menu.Item as={Link} to='/login' active={location.pathname === '/login'} >Log in</Menu.Item>
+                <Menu.Item as={Link} to='/register' active={location.pathname === '/register'} >Sign up</Menu.Item>
+            </div>
+        )}
+
+
+
+    </Container>
+);
+
+
+/*
 const HomepageMenu = withRouter(({fixed, desktop, location}) => (
   <Container>
     <Menu.Item as={Link} to="/" active={location.pathname === '/'}>Home</Menu.Item>
@@ -33,7 +58,7 @@ const HomepageMenu = withRouter(({fixed, desktop, location}) => (
 
   </Container>
 ));
-
+*/
 HomepageMenu.propTypes = {
   fixed: PropTypes.bool,
   desktop: PropTypes.bool

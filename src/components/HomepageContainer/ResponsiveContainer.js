@@ -3,12 +3,14 @@ import React from 'react';
 import DesktopContainer from './DesktopContainer';
 import MobileContainer from './MobileContainer';
 
+import { withRouter } from "react-router-dom";
 
-const ResponsiveContainer = ({children}) => (
+
+const ResponsiveContainer = withRouter(({ children, location }) => (
   <div>
-    <DesktopContainer>{children}</DesktopContainer>
-    <MobileContainer>{children}</MobileContainer>
+    <DesktopContainer location={location} >{children}</DesktopContainer>
+    <MobileContainer location={location} >{children}</MobileContainer>
   </div>
-);
+));
 
 export default ResponsiveContainer;

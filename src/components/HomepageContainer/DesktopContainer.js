@@ -19,6 +19,19 @@ class DesktopContainer extends Component {
     const { children } = this.props;
     const { fixed } = this.state;
 
+    let homepageHeading =  <HomepageHeading />;
+    let segmentStyle = { minHeight: 700, padding: '1em 0em' };
+
+    switch (this.props.location.pathname) {
+        case '/register':
+        case '/login':
+            segmentStyle = { padding: '1em 0em' };
+            homepageHeading = null;
+          break;
+        default:
+            break;
+    }
+
     return (
       <Responsive minWidth={Responsive.onlyTablet.minWidth}>
         <Visibility
@@ -29,7 +42,7 @@ class DesktopContainer extends Component {
           <Segment
             inverted
             textAlign='center'
-            style={{ minHeight: 700, padding: '1em 0em' }}
+            style={segmentStyle}
             vertical
           >
             <Menu
@@ -40,10 +53,12 @@ class DesktopContainer extends Component {
               size='large'
             >
 
-            <HomepageMenu fixed={fixed} desktop />
+            <HomepageMenu fixed={fixed} desktop location={this.props.location} />
 
             </Menu>
-            <HomepageHeading />
+
+            {homepageHeading}
+
           </Segment>
         </Visibility>
 

@@ -29,13 +29,27 @@ class MobileContainer extends Component {
     const { children } = this.props;
     const { sidebarOpened } = this.state;
 
+    let homepageHeading =  <HomepageHeading mobile />;
+    let segmentStyle = { minHeight: 350, padding: '1em 0em' };
+
+    switch (this.props.location.pathname) {
+        case '/register':
+        case '/login':
+            segmentStyle = { padding: '1em 0em' };
+            homepageHeading = null;
+            break;
+        default:
+            break;
+    }
+
+
     return (
 
       <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>
         <Sidebar.Pushable>
           <Sidebar as={Menu} animation='push' inverted vertical visible={sidebarOpened}>
 
-            <HomepageMenu />
+            <HomepageMenu location={this.props.location}/>
 
           </Sidebar>
 
@@ -47,7 +61,7 @@ class MobileContainer extends Component {
             <Segment
               inverted
               textAlign='center'
-              style={{ minHeight: 350, padding: '1em 0em' }}
+              style={segmentStyle}
               vertical
             >
 
@@ -67,7 +81,7 @@ class MobileContainer extends Component {
                 </Menu>
               </Container>
 
-              <HomepageHeading mobile />
+                {homepageHeading}
 
             </Segment>
 

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 
-import {Button, Form, Input, Segment, Grid} from "semantic-ui-react";
+import {Button, Form, Input, Segment, Grid, Header, Image, Message} from "semantic-ui-react";
+
+
 
 import fakeAuth from '../../../service/fakeAuth';
 
-import { Redirect, withRouter } from 'react-router-dom';
+import { Redirect, Link, withRouter } from 'react-router-dom';
 
 
 class Login extends Component {
@@ -15,7 +17,7 @@ class Login extends Component {
     this.state = {
       redirectToReferrer: false,
 
-      fields: {
+        values: {
         email:"",
         password: ""
       }
@@ -29,14 +31,12 @@ class Login extends Component {
   }
 
 
-  changeHandler(evt, data) {
-    let name = data.name;
-    let value = data.value;
+  changeHandler(evt, {name, value}) {
 
-    let fields = this.state.fields;
-    fields[name] = value;
+    let values = this.state.values;
+      values[name] = value;
 
-    this.setState({fields:fields});
+    this.setState({values:values});
 
   }
   
@@ -65,36 +65,34 @@ class Login extends Component {
 
     //return <LoginCode/>;
 
-    console.log(this.state.fields);
-      
-      
+    console.log(this.state.values);
+
+
     return (
+        <div className='login-form' style={{paddingTop: '4em'}}>
+            <Grid textAlign='center' style={{height: '100%'}} verticalAlign='middle'>
+                <Grid.Column style={{maxWidth: 450}}>
+                    <Header as='h2' color='teal' textAlign='center'>
+                        <Image src='img/logo.png'/> Log-in to your account
+                    </Header>
+                    <Form size='large' onSubmit={this.submit} >
+                        <Segment stacked>
+                            <Form.Input fluid name='email' icon='user' iconPosition='left' placeholder='E-mail address' onChange={this.changeHandler} />
+                            <Form.Input fluid name='password' icon='lock' iconPosition='left' placeholder='Password' type='password' onChange={this.changeHandler} />
 
-      <Segment style={{ padding: '8em 0em' }} vertical>
-        <Grid container stackable verticalAlign='middle'>
-          <Grid.Row>
-            <Grid.Column width={8}>
+                            <Button type='submit' color='blue' fluid size='large'>
+                                Login
+                            </Button>
+                        </Segment>
+                    </Form>
+                    <Message>
+                        New to us? <Link to='/register'>Sign Up</Link>
+                    </Message>
+                </Grid.Column>
+            </Grid>
+        </div>
+  );
 
-              <Form onSubmit={this.submit} >
-                <Form.Field>
-                  <label>Email</label>
-                  <Input name="email" placeholder='Email' onChange={this.changeHandler}/>
-                </Form.Field>
-                <Form.Field>
-                  <label>Password</label>
-                  <Input name="password" placeholder='Password' onChange={this.changeHandler}/>
-                </Form.Field>
-                <Button type='submit'>Login</Button>
-              </Form>
-
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Segment>
-
-
-
-    );
 
   }
 

@@ -29,7 +29,7 @@ class AuthButton extends Component {
         <Button as={Link} to='/login'  inverted={!fixed}>
           Log in
         </Button>
-        <Button as='a' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
+        <Button as={Link} to='/register' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
           Sign Up
         </Button>
       </div>
