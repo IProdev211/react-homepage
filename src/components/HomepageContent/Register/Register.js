@@ -10,6 +10,8 @@ import { Redirect, Link, withRouter } from 'react-router-dom';
 
 import axios from 'axios';
 
+import apiService from '../../../service/apiService';
+
 
 class Register extends Component {
 
@@ -58,20 +60,15 @@ class Register extends Component {
           password: this.state.values.password,
         };
 
+      apiService.register(user).then(data => {
+        // TODO: show success message
+        this.setState({redirectToLogin: true});
+      }).catch(error => {
+        // TODO: show error message
+        console.log(error);
+      })
 
-        axios.post('http://localhost:5000/api/register', {user:user}).then((response) => {
 
-          // TODO: show success message
-            this.setState({redirectToLogin: true});
-
-            console.log(response);
-
-        }).catch((error) => {
-
-            // TODO: show error message
-            console.log(error);
-
-        });
 
     }
 

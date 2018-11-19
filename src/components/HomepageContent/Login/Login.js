@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import {Button, Form, Input, Segment, Grid, Header, Image, Message} from "semantic-ui-react";
 
-
+import apiService from '../../../service/apiService';
 
 import fakeAuth from '../../../service/fakeAuth';
 
@@ -48,19 +48,16 @@ class Login extends Component {
       password: this.state.values.password,
     };
 
-    axios.post('http://localhost:5000/api/login', {user:user}).then((response) => {
-
+    apiService.login(user).then(data => {
       fakeAuth.authenticate(() => {
         this.setState({ redirectToReferrer: true });
       });
-
-
-    }).catch((error) => {
-
-      // TODO: show error message
+    }).catch(error => {
       console.log(error);
+    })
 
-    });
+
+
   }
   
   render() {
