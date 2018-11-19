@@ -8,6 +8,8 @@ import fakeAuth from '../../../service/fakeAuth';
 
 import { Redirect, Link, withRouter } from 'react-router-dom';
 
+import axios from 'axios';
+
 
 class Register extends Component {
 
@@ -15,7 +17,7 @@ class Register extends Component {
         super(props);
 
         this.state = {
-            redirectToReferrer: false,
+            redirectToLogin: false,
 
             values: {
                 firstname:'',
@@ -49,31 +51,36 @@ class Register extends Component {
 
     submit() {
 
-        //TODO: Axios call (localhost:5000/api/login)
+        let user = {
+          firstname: this.state.values.firstname,
+          lastname: this.state.values.lastname,
+          email: this.state.values.email,
+          password: this.state.values.password,
+        };
 
-        console.log("Submit");
+
+        axios.post('http://localhost:5000/api/register', {user:user}).then((response) => {
+
+          // TODO: show success message
+            this.setState({redirectToLogin: true});
+
+            console.log(response);
+
+        }).catch((error) => {
+
+            // TODO: show error message
+            console.log(error);
+
+        });
+
     }
 
 
-    login = () => {
-        fakeAuth.authenticate(() => {
-            this.setState({ redirectToReferrer: true });
-        });
-    };
-
     render() {
 
-        const { from } = this.props.location.state || { from: { pathname: '/' } };
-        const { redirectToReferrer } = this.state;
+        const { redirectToLogin } = this.state;
 
-        if (redirectToReferrer) return <Redirect to={from} />;
-
-        const LoginCode = withRouter(({history}) => <Button size='huge' color='green' onClick={() => this.login(history)} >Login</Button>);
-
-        //return <LoginCode/>;
-
-        console.log(this.state.values);
-
+        if (redirectToLogin) return <Redirect to='/login' />;
 
         return (
             <div className='login-form' style={{paddingTop: '4em'}}>

@@ -7,6 +7,7 @@ import {Button, Form, Input, Segment, Grid, Header, Image, Message} from "semant
 import fakeAuth from '../../../service/fakeAuth';
 
 import { Redirect, Link, withRouter } from 'react-router-dom';
+import axios from "axios";
 
 
 class Login extends Component {
@@ -17,7 +18,7 @@ class Login extends Component {
     this.state = {
       redirectToReferrer: false,
 
-        values: {
+      values: {
         email:"",
         password: ""
       }
@@ -42,31 +43,32 @@ class Login extends Component {
   
   submit() {
 
-    //TODO: Axios call (localhost:5000/api/login)
+    let user = {
+      email: this.state.values.email,
+      password: this.state.values.password,
+    };
 
-    console.log("Submit");
+    axios.post('http://localhost:5000/api/login', {user:user}).then((response) => {
+
+      fakeAuth.authenticate(() => {
+        this.setState({ redirectToReferrer: true });
+      });
+
+
+    }).catch((error) => {
+
+      // TODO: show error message
+      console.log(error);
+
+    });
   }
   
-  
-  login = () => {
-    fakeAuth.authenticate(() => {
-      this.setState({ redirectToReferrer: true });
-    });
-  };
-
   render() {
 
     const { from } = this.props.location.state || { from: { pathname: '/' } };
     const { redirectToReferrer } = this.state;
 
     if (redirectToReferrer) return <Redirect to={from} />;
-
-    const LoginCode = withRouter(({history}) => <Button size='huge' color='green' onClick={() => this.login(history)} >Login</Button>);
-
-    //return <LoginCode/>;
-
-    console.log(this.state.values);
-
 
     return (
         <div className='login-form' style={{paddingTop: '4em'}}>
