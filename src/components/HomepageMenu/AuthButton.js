@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Button} from "semantic-ui-react";
 
-import fakeAuth from '../../service/fakeAuth';
+import auth from '../../service/auth';
 
 import {Link, withRouter} from 'react-router-dom';
 
@@ -13,13 +13,13 @@ class AuthButton extends Component {
     const {fixed} = this.props;
 
     const AuthButtonCode = withRouter(({ history }) =>
-      (fakeAuth.isAuthenticated) ? (
+      (auth.isAuthenticated) ? (
       <div>
 
         <span style={{ marginRight: '0.5em' }}>Welcome...</span>
 
         <Button as='a' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}
-                onClick={() => fakeAuth.signout(() => history.push('/') )}>
+                onClick={() => auth.signout(() => history.push('/') )}>
             Sign Out
         </Button>
       </div>

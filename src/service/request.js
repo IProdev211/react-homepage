@@ -1,9 +1,16 @@
 
 import axios from 'axios';
 
+import {session} from './Session';
+
 const client = axios.create({
   baseURL: 'http://localhost:5000/api'
 });
+
+// Add jwt token to header
+const token = session.get('token');
+if (token) axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+
 
 const request = function(options) {
 

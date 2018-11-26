@@ -4,7 +4,7 @@ import {Button, Form, Input, Segment, Grid, Header, Image, Message} from "semant
 
 
 
-import fakeAuth from '../../../service/fakeAuth';
+import auth from '../../../service/auth';
 
 import { Redirect, Link, withRouter } from 'react-router-dom';
 

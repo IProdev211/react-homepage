@@ -4,10 +4,12 @@ import {Button, Form, Input, Segment, Grid, Header, Image, Message} from "semant
 
 import apiService from '../../../service/apiService';
 
-import fakeAuth from '../../../service/fakeAuth';
+import auth from '../../../service/auth';
+
+import {session} from '../../../service/Session';
 
 import { Redirect, Link, withRouter } from 'react-router-dom';
-import axios from "axios";
+
 
 
 class Login extends Component {
@@ -49,9 +51,25 @@ class Login extends Component {
     };
 
     apiService.login(user).then(data => {
-      fakeAuth.authenticate(() => {
+
+      /*
+      console.log(data);
+
+      let user = data.user;
+      session.set('user', user);
+
+      let token = data.token;
+      session.set('token', token);
+
+     // this.setState({ redirectToReferrer: true });
+*/
+
+      auth.authenticate(data.user, data.token,() => {
         this.setState({ redirectToReferrer: true });
       });
+
+
+
     }).catch(error => {
       console.log(error);
     })
