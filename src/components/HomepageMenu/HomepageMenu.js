@@ -8,7 +8,6 @@ import {Link} from "react-router-dom";
 
 import AuthButton from './AuthButton';
 
-
 const HomepageMenu = ({fixed, desktop, location}) => (
     <Container>
         <Menu.Item as={Link} to="/" active={location.pathname === '/'}>Home</Menu.Item>
@@ -18,7 +17,7 @@ const HomepageMenu = ({fixed, desktop, location}) => (
 
         {desktop ? (
             <Menu.Item position='right'>
-                <AuthButton fixed={fixed} />
+              <AuthButton fixed={fixed} />
             </Menu.Item>
         ) : (
             <div>

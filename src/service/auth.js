@@ -1,8 +1,21 @@
 
 import {session} from './Session';
 
+import apiService from './apiService';
+
+// Check Token on first start
+
+if (session.get('token'))
+  apiService.checkToken(session.get('token')).then(result => {
+    console.log(result);
+  });
+
+
+
 
 const auth = {
+
+  isChecked: false,
 
   isAuthenticated: false,
 
@@ -24,7 +37,9 @@ const auth = {
 
     callback();
 
-  }
+  },
+
+
 
 };
 

@@ -28,10 +28,17 @@ function register(user) {
   });
 }
 
+function checkToken(token) {
+  return request({
+    url: '/checkToken',
+    method: 'POST'
+  });
+}
+
 
 
 const apiService = {
-  get, login, register
+  get, login, register, checkToken
 };
 
 export default apiService;
