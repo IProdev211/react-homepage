@@ -28,7 +28,7 @@ function register(user) {
   });
 }
 
-function checkToken(token) {
+function checkToken() {
   return request({
     url: '/checkToken',
     method: 'POST'

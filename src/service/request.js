@@ -11,6 +11,9 @@ const client = axios.create({
 const token = session.get('token');
 if (token) axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 
+// TODO: check init() function
+//console.log('Added token to header');
+
 
 const request = function(options) {
 

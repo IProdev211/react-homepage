@@ -33,6 +33,16 @@ class Login extends Component {
 
   }
 
+  componentWillMount() {
+    apiService.checkToken().then(data => {
+      auth.authenticate(data.user, data.token, () => {
+        this.setState({ redirectToReferrer: true });
+      });
+    }).catch(() => {
+      auth.signout();
+    });
+  }
+
 
   changeHandler(evt, {name, value}) {
 
@@ -51,25 +61,9 @@ class Login extends Component {
     };
 
     apiService.login(user).then(data => {
-
-      /*
-      console.log(data);
-
-      let user = data.user;
-      session.set('user', user);
-
-      let token = data.token;
-      session.set('token', token);
-
-     // this.setState({ redirectToReferrer: true });
-*/
-
       auth.authenticate(data.user, data.token,() => {
         this.setState({ redirectToReferrer: true });
       });
-
-
-
     }).catch(error => {
       console.log(error);
     })

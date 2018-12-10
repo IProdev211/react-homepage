@@ -8,8 +8,7 @@ const Protected = () => (
   <Segment style={{ padding: '8em 0em' }} vertical>
     <Header as='h3' style={{ fontSize: '2em' }}>
       PROTECTED NEW!!!
-      PROTECTED NEW!!!
-      PROTECTED NEW!!!
+
 
     </Header>
   </Segment>
