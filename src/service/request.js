@@ -7,15 +7,14 @@ const client = axios.create({
   baseURL: 'http://localhost:5000/api'
 });
 
-// Add jwt token to header
-const token = session.get('token');
-if (token) axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
-
-// TODO: check init() function
-//console.log('Added token to header');
-
 
 const request = function(options) {
+
+  // Add jwt token to header or remove it on each request
+  const token = session.get('token');
+  if (token) axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+  else axios.defaults.headers.common['Authorization'] = '';
+
 
   const onSuccess = function(response) {
     console.debug('Request successful', response);
