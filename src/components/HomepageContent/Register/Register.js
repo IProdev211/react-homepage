@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
 
-import {Button, Form, Input, Segment, Grid, Header, Image, Message} from "semantic-ui-react";
+import {Button, Form, Segment, Grid, Header, Image, Message} from "semantic-ui-react";
 
-
-
-import auth from '../../../service/auth';
-
-import { Redirect, Link, withRouter } from 'react-router-dom';
-
-import axios from 'axios';
+import { Redirect, Link } from 'react-router-dom';
 
 import apiService from '../../../service/apiService';
-
 
 class Register extends Component {
 

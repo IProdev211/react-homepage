@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {Button, Form, Input, Segment, Grid, Header, Image, Message} from "semantic-ui-react";
+import {Button, Form, Segment, Grid, Header, Image, Message} from "semantic-ui-react";
 
 import apiService from '../../../service/apiService';
 
@@ -8,7 +8,7 @@ import auth from '../../../service/auth';
 
 import {session} from '../../../service/Session';
 
-import { Redirect, Link, withRouter } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 
 
