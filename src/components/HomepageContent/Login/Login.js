@@ -34,12 +34,12 @@ class Login extends Component {
   }
 
   componentWillMount() {
-    apiService.checkToken().then(data => {
-      auth.authenticate(data.user, data.token, () => {
+
+    const token = session.get('token');
+    apiService.checkToken(token).then(data => {
+      auth.authenticate(data.user, data.token,() => {
         this.setState({ redirectToReferrer: true });
       });
-    }).catch(() => {
-      auth.signout();
     });
   }
 

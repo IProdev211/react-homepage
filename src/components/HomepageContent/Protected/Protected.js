@@ -1,8 +1,6 @@
 import React from "react";
 
-
 import {Segment, Header} from "semantic-ui-react";
-
 
 const Protected = () => (
   <Segment style={{ padding: '8em 0em' }} vertical>
