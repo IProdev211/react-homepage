@@ -35,10 +35,17 @@ function checkToken() {
   });
 }
 
+function getFeeds() {
+  return request({
+    url: '/feeds',
+    method: 'POST'
+  });
+}
+
 
 
 const apiService = {
-  get, login, register, checkToken
+  get, login, register, checkToken, getFeeds
 };
 
 export default apiService;
