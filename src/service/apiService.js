@@ -53,10 +53,31 @@ function newMessage(user, message) {
   });
 }
 
+function newRoom(user, newRoom) {
+  return request({
+    url: '/newRoom',
+    method: 'POST',
+    data: {
+      user:user,
+      newRoom:newRoom
+    }
+  });
+}
+
+function getOwnRooms(user) {
+  return request({
+    url: '/ownRooms',
+    method: 'POST',
+    data: {
+      user:user
+    }
+  });
+}
+
 
 
 const apiService = {
-  get, login, register, checkToken, getFeeds, newMessage
+  get, login, register, checkToken, getFeeds, newMessage, newRoom, getOwnRooms
 };
 
 export default apiService;

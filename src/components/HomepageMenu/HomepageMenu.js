@@ -13,6 +13,7 @@ const HomepageMenu = ({fixed, desktop, location}) => (
         <Menu.Item as={Link} to="/" active={location.pathname === '/'}>Home</Menu.Item>
         <Menu.Item as={Link} to="/public" active={location.pathname === '/public'}>Public</Menu.Item>
 
+        <Menu.Item as={Link} to="/room" active={location.pathname === '/room'}>Room</Menu.Item>
         <Menu.Item as={Link} to="/chat" active={location.pathname === '/chat'}>Chat</Menu.Item>
 
         {desktop ? (

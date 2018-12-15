@@ -8,7 +8,10 @@ import ResponsiveContainer from './HomepageContainer/ResponsiveContainer';
 
 import Home from './HomepageContent/Home/Home';
 import Public from "./HomepageContent/Public/Public";
+
 import Chat from "./HomepageContent/Chat/Chat";
+import Room from "./HomepageContent/Room/Room";
+
 import Login from "./HomepageContent/Login/Login";
 import Register from "./HomepageContent/Register/Register";
 
@@ -29,6 +32,7 @@ const HomepageLayout = () => (
     <Route path="/register" component={Register} />
 
 
+    <PrivateRoute path="/room" component={Room} />
     <PrivateRoute path="/chat" component={Chat} />
 
 
