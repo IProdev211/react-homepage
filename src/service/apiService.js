@@ -42,10 +42,21 @@ function getFeeds() {
   });
 }
 
+function newMessage(user, message) {
+  return request({
+    url: '/newMessage',
+    method: 'POST',
+    data: {
+      user:user,
+      message:message
+    }
+  });
+}
+
 
 
 const apiService = {
-  get, login, register, checkToken, getFeeds
+  get, login, register, checkToken, getFeeds, newMessage
 };
 
 export default apiService;

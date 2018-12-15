@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 
-import {Segment, Header} from "semantic-ui-react";
+import {Segment, Header, Form, Button} from "semantic-ui-react";
 
 import apiService from '../../../service/apiService';
 
 import FeedList from './FeedList';
-import auth from "../../../service/auth";
+
+import auth from '../../../service/auth';
 
 class Chat extends Component {
 
@@ -13,6 +14,7 @@ class Chat extends Component {
     super(props);
 
     this.state = {
+      message: '',
       events: [],
     }
 
@@ -23,62 +25,25 @@ class Chat extends Component {
       this.setState({ events: events });
     });
   }
+  
+  changeHandler(evt, target) {
+    this.setState({message:target.value});
+  }
+  
+  submitHandler() {
+    console.log(this.state.message);
+
+    let user = auth.user;
+
+    apiService.newMessage(auth.user, this.state.message);
+
+  }
 
   render() {
 
     let events = this.state.events;
 
-    /*
-    
-    let events = [
 
-      {
-
-        user_thumb: '/img/elliot.jpg',
-
-        user_id: 5,
-        user_firstname: 'Elliot',
-        user_lastname: 'Fu',
-
-        date: '1 Hour Ago',
-
-        content: 'added you as a friend',
-
-        text: 'Ours is a life of constant reruns. We\'re always circling back to where we\'d we started,\n' +
-          '            then starting all over again. Even if we don\'t run extra laps that day, we surely will\n' +
-          '            come back for more of the same another day soon.',
-
-        image: '/img/image.png',
-
-        likes: 5,
-
-      },
-
-      {
-
-        user_thumb: '/img/elliot.jpg',
-
-        user_id: 5,
-        user_firstname: 'Elliot',
-        user_lastname: 'Fu',
-
-        date: '1 Hour Ago',
-
-        content: 'added you as a friend',
-
-        text: 'Ours is a life of constant reruns. We\'re always circling back to where we\'d we started,\n' +
-          '            then starting all over again. Even if we don\'t run extra laps that day, we surely will\n' +
-          '            come back for more of the same another day soon.',
-
-        image: '/img/image.png',
-
-        likes: 1,
-
-      },
-
-    ];
-
-    */
 
 
     return (
@@ -88,6 +53,16 @@ class Chat extends Component {
         </Header>
 
         <FeedList events={events}/>
+
+
+        <Form onSubmit={this.submitHandler.bind(this)}>
+
+
+          <Form.TextArea placeholder='Write something...' value={this.state.message} onChange={this.changeHandler.bind(this)}/>
+
+          <Button type='submit'>Submit</Button>
+        </Form>
+
 
 
       </Segment>
