@@ -19,36 +19,66 @@ class AllRooms extends Component {
 
     this.state = {
       rooms: [],
-    }
+      members: []
+    };
+
+    this.getOwnRooms = this.getOwnRooms.bind(this);
 
   }
 
-  componentWillMount() {
+  getOwnRooms() {
     apiService.getOwnRooms(auth.user).then(rooms => {
-      console.log(rooms);
       this.setState({rooms: rooms});
-
     });
+  }
+
+  getAllMembers() {
+    apiService.getMembers(auth.user.id).then(members => {
+      this.setState({members: members});
+    });
+  }
+
+  componentWillMount() {
+    this.getOwnRooms();
+    this.getAllMembers();
+  }
+
+  deleteMember(member_id) {
+    apiService.deleteMember(member_id).then(() => {
+      this.getOwnRooms();
+    });
+  }
+
+  addMember(roomId, selectedMember) {
+    if (selectedMember !== '') {
+      apiService.addMember(roomId, selectedMember).then(() => {
+        this.getOwnRooms();
+      });
+    }
   }
 
   render() {
 
     let rooms = this.state.rooms;
+    let members = this.state.members;
+
+    let memberList = members.map(member =>  {
+      return {
+        key: member.id,
+        value: member.id,
+        text: `${member.firstname} ${member.lastname} - ${member.email}`
+      };
+    });
+
+    memberList.unshift({key:'', value:'', text:''});
 
     let roomPanels = rooms.map(room => {
       return {
         key: `room_id-${room.id}`,
         title: `${room.name} (${room.count})`,
-        content: <div className="content active"><RoomMemberList members={room.members}/></div>
+        content: <RoomMemberList roomId={room.id} members={room.members} memberList={memberList} addHandler={this.addMember.bind(this)} deleteHandler={this.deleteMember.bind(this)}/>
       };
     });
-
-    const panels = _.times(3, i => ({
-      key: `panel-${i}`,
-      title: faker.lorem.sentence(),
-      content: faker.lorem.paragraphs(),
-    }));
-
 
     return <Accordion defaultActiveIndex={[0,2]} panels={roomPanels} exclusive={false} styled />;
 

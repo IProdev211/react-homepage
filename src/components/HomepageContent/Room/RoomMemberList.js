@@ -1,29 +1,55 @@
 import React, {Component} from 'react';
 
-import {Accordion, Icon, List, Image, Button, Form, Segment} from 'semantic-ui-react';
+import {Icon, List, Image, Button, Form} from 'semantic-ui-react';
 
 
 class RoomMemberList extends Component {
 
+  state = {
+    selectedMember: ''
+  };
+
+  selectHandler(evt, target) {
+    this.setState({selectedMember: target.value});
+  }
+  
+  focusHandler() {
+    this.setState({selectedMember: ''});
+  }
+
   render() {
 
+    const allMembers = this.props.memberList;
+    const roomId = this.props.roomId;
+    const selectedMember = this.state.selectedMember;
     const members = this.props.members;
+    const deleteHandler = this.props.deleteHandler;
+    const addHandler = this.props.addHandler;
 
-    if (members.length === 0) return (
-      <List style={{padding:'0 1em', marginTop:0}} >
-        <List.Item>
-          <Form >
-            <Form.Field>
-              <label>Add user</label>
-              <Form.Group widths="equal">
-                <Form.Input placeholder='username' />
-                <Button type='submit' xxfloated="right" icon><Icon name='plus' /></Button>
-              </Form.Group>
-            </Form.Field>
-          </Form>
-        </List.Item>
-      </List>
+    const addMemberForm = (
+      <List.Item>
+        <Form >
+          <Form.Field>
+            <label>Add user</label>
+            <Form.Group widths="equal">
+              <Form.Select placeholder='Select User' search selection
+                           value={selectedMember}
+                           options={allMembers}
+                           onChange={this.selectHandler.bind(this)}
+                           onFocus={this.focusHandler.bind(this)}
+              />
+              <Button type='submit' icon onClick={() => {addHandler(roomId, selectedMember); this.setState({selectedMember: ''});}}>
+                <Icon name='plus' />
+              </Button>
+            </Form.Group>
+          </Form.Field>
+        </Form>
+      </List.Item>
     );
+
+
+    if (members.length === 0) return <List style={{padding:'.5em 1em'}} >{addMemberForm}</List>;
+
 
     const memberList = members.map(member => (
       <List.Item key={member.id}>
@@ -34,7 +60,7 @@ class RoomMemberList extends Component {
             {member.user_email}
           </List.Description>
         </List.Content>
-        <Button icon floated="right">
+        <Button icon floated="right" onClick={() => {deleteHandler(member.id)}}>
           <Icon name='trash' />
         </Button>
       </List.Item>
@@ -42,19 +68,12 @@ class RoomMemberList extends Component {
 
 
     return (
-      <List style={{padding:'0 1em', marginTop:0}} >
+      <List style={{padding:'.5em 1em'}} >
+
         {memberList}
-        <List.Item>
-          <Form >
-            <Form.Field>
-              <label>Add user</label>
-              <Form.Group widths="equal">
-                <Form.Input placeholder='username' />
-                <Button type='submit' icon><Icon name='plus' /></Button>
-              </Form.Group>
-            </Form.Field>
-          </Form>
-        </List.Item>
+
+        {addMemberForm}
+
       </List>
     );
 

@@ -74,10 +74,42 @@ function getOwnRooms(user) {
   });
 }
 
+function deleteMember(member_id) {
+  return request({
+    url: '/deleteMember',
+    method: 'POST',
+    data: {
+      member_id: member_id
+    }
+  });
+}
+
+function getMembers(user_id) {
+  return request({
+    url: '/getMembers',
+    method: 'POST',
+    data: {
+      user_id: user_id
+    }
+  });
+}
+
+function addMember(room_id, member_id) {
+  return request({
+    url: '/addMember',
+    method: 'POST',
+    data: {
+      room_id: room_id,
+      member_id: member_id
+    }
+  });
+}
+
+
 
 
 const apiService = {
-  get, login, register, checkToken, getFeeds, newMessage, newRoom, getOwnRooms
+  get, login, register, checkToken, getFeeds, newMessage, newRoom, getOwnRooms, deleteMember, getMembers, addMember
 };
 
 export default apiService;

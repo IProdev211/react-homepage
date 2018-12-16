@@ -18,8 +18,6 @@ class Room extends Component {
 
     this.state = {
 
-      activeIndex: 0,
-
       newRoom: '',
 
       rooms: [],
@@ -30,11 +28,7 @@ class Room extends Component {
   
   submitHandler() {
     apiService.newRoom(auth.user, this.state.newRoom).then(() => {
-
-
-
-
-        this.setState({newRoom: ''});
+      this.setState({newRoom: ''});
     });
 
   }
@@ -43,18 +37,10 @@ class Room extends Component {
     this.setState({newRoom: target.value});
   }
 
-  roomHandler(e, titleProps) {
-    const { index } = titleProps;
-    const { activeIndex } = this.state;
-    const newIndex = activeIndex === index ? -1 : index;
-    this.setState({ activeIndex: newIndex });
-  }
 
 
 
   render() {
-
-    const { activeIndex } = this.state;
 
     return (
       <Segment style={{ padding: '2em 2em' }} vertical>
