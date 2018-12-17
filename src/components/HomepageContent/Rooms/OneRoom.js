@@ -15,7 +15,7 @@ class OneRoom extends Component {
       <Segment.Group >
         <Segment color='blue' clearing>
           <Header floated='left'>{room.name}</Header>
-          <Button floated='right' size="small" icon onClick={() => this.props.deleteRoomHandler(room.id)}>
+          <Button floated='right' size="small" icon onClick={() => this.props.deleteRoomHandler(room.id, room.name)}>
             <Icon name='trash' />
           </Button>
           <Button floated='right' size="small" icon onClick={() => this.props.modalHandler(room.id, room.name)}>

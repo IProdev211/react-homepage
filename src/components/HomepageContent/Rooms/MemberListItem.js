@@ -18,7 +18,7 @@ class MemberListItem extends Component {
             {member.user_email}
           </List.Description>
         </List.Content>
-        <Button icon floated="right" onClick={() => {deleteHandler(member.id)}}>
+        <Button icon floated="right" onClick={() => {deleteHandler(member.id, member.user_firstname + ' ' + member.user_lastname)}}>
           <Icon name='trash' />
         </Button>
       </List.Item>

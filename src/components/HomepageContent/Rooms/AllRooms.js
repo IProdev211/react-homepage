@@ -37,9 +37,9 @@ class AllRooms extends Component {
       modalMessageOpen: false,
       modalMessageHeader: '',
       modalMessageContent: '',
+      modalMessageIcon: '',
+      modalMessageLabel: '',
       modalMessageOkHandler: null,
-
-
 
     };
 
@@ -53,9 +53,7 @@ class AllRooms extends Component {
     this.deleteMember = this.deleteMember.bind(this);
 
     this.deleteRoom = this.deleteRoom.bind(this);
-
     this.closeModalMessage = this.closeModalMessage.bind(this);
-
     this.openModalMessage = this.openModalMessage.bind(this);
 
   }
@@ -84,21 +82,24 @@ class AllRooms extends Component {
   }
 
   closeModal() {
-    this.setState({modalOpen:false});
+    this.setState({modalOpen:false, modalRoomId:null, modalRoomName:'', modalMemberList:[]});
   }
 
   addMember(room_id, member_id) {
     apiService.addMember(room_id, member_id).then(() => {
-      this.setState({modalOpen:false, modalRoomId:null, modalRoomName:''});
+      this.closeModal();
       this.getOwnRooms();
     });
   }
 
   //_----------------------------------------------------------------------
 
-  deleteMember(member_id) {
-    apiService.deleteMember(member_id).then(() => {
-      this.getOwnRooms();
+  deleteMember(member_id, member_name) {
+    this.openModalMessage('Remove member', 'Do you really want to remove the member', 'exclamation triangle', member_name,() => {
+      apiService.deleteMember(member_id).then(() => {
+        this.closeModalMessage();
+        this.getOwnRooms();
+      });
     });
   }
 
@@ -114,32 +115,25 @@ class AllRooms extends Component {
     });
   }
 
-  deleteRoom(room_id) {
-
-    this.openModalMessage('Löschen wollen?', 'sdfdsfdsfdsf', () => {
+  deleteRoom(room_id, room_name) {
+    this.openModalMessage('Delete room', 'Do you really want to delete the room', 'exclamation triangle', room_name,() => {
       apiService.deleteRoom(room_id).then(() => {
-        this.setState({modalMessageOpen: false, modalMessageHeader:'', modalMessageContent: '', modalMessageOkHandler:null});
+        this.closeModalMessage();
+        //this.setState({modalMessageOpen: false, modalMessageHeader:'', modalMessageContent: '', modalMessageIcon: '', modalMessageLabel: '', modalMessageOkHandler:null});
         this.getOwnRooms();
       });
-
     });
-/*
-    apiService.deleteRoom(room_id).then(() => {
-      this.getOwnRooms();
-    });
-*/
   }
-//_----------------------------------------------------------------------
 
-  openModalMessage(header, content, okHandler) {
-    this.setState({modalMessageOpen: true, modalMessageHeader:header, modalMessageContent: content, modalMessageOkHandler:okHandler});
+  //_----------------------------------------------------------------------
+
+  openModalMessage(header, content, icon, label, okHandler) {
+    this.setState({modalMessageOpen: true, modalMessageHeader:header, modalMessageContent: content, modalMessageIcon: icon, modalMessageLabel: label, modalMessageOkHandler:okHandler});
   }
 
   closeModalMessage() {
-    this.setState({modalMessageOpen: false});
+    this.setState({modalMessageOpen: false, modalMessageHeader:'', modalMessageContent: '', modalMessageIcon: '', modalMessageLabel: '', modalMessageOkHandler:null});
   }
-
-
 
   //_----------------------------------------------------------------------
 
@@ -181,6 +175,8 @@ class AllRooms extends Component {
           okHandler={this.state.modalMessageOkHandler}
           header={this.state.modalMessageHeader}
           content={this.state.modalMessageContent}
+          icon={this.state.modalMessageIcon}
+          label={this.state.modalMessageLabel}
         />
 
       </div>
