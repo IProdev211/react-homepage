@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {Button, Icon, Modal, Header, Label} from 'semantic-ui-react';
+import {Button, Icon, Modal} from 'semantic-ui-react';
 
 
 class ModalMessage extends Component {
@@ -29,7 +29,7 @@ class ModalMessage extends Component {
           <Button basic inverted onClick={this.props.closeHandler}>
             <Icon name='remove' /> No
           </Button>
-          <Button color='green' inverted onClick={this.props.okHandler}>
+          <Button color='green' inverted onClick={this.props.actionHandler}>
             <Icon name='checkmark' /> Yes
           </Button>
         </Modal.Actions>

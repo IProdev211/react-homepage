@@ -9,7 +9,7 @@ class MemberList extends Component {
   render() {
 
     const memberList = this.props.members.map((member) =>
-      <MemberListItem key={member.id} member={member} deleteHandler={this.props.deleteHandler}/>
+      <MemberListItem key={member.id} member={member} deleteMemberHandler={this.props.deleteMemberHandler}/>
     );
 
     return (

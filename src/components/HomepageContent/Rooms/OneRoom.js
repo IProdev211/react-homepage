@@ -18,12 +18,12 @@ class OneRoom extends Component {
           <Button floated='right' size="small" icon onClick={() => this.props.deleteRoomHandler(room.id, room.name)}>
             <Icon name='trash' />
           </Button>
-          <Button floated='right' size="small" icon onClick={() => this.props.modalHandler(room.id, room.name)}>
+          <Button floated='right' size="small" icon onClick={() => this.props.openMemberModalHandler(room.id, room.name)}>
             <Icon name='plus' />
           </Button>
         </Segment>
         <Segment basic>
-          <MemberList members={room.members} deleteHandler={this.props.deleteHandler}/>
+          <MemberList members={room.members} deleteMemberHandler={this.props.deleteMemberHandler}/>
         </Segment>
       </Segment.Group>
     );

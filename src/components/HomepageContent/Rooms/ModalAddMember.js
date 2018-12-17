@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Button,Icon, Modal, Form, Label } from 'semantic-ui-react';
 
 
-class AddMember extends Component {
+class ModalAddMember extends Component {
 
   constructor(props) {
 
@@ -21,12 +21,12 @@ class AddMember extends Component {
 
   closeAndReset() {
     this.setState({member_id: null});
-    this.props.closeModal();
+    this.props.closeHandler();
   }
 
   addMemberToRoom() {
     if (this.state.member_id) {
-      this.props.addMember(this.props.modalRoomId, this.state.member_id);
+      this.props.actionHandler(this.props.roomId, this.state.member_id);
       this.setState({member_id: null});
     }
   }
@@ -37,7 +37,7 @@ class AddMember extends Component {
 
   render() {
 
-    let modalMemberList = this.props.modalMemberList;
+    let modalMemberList = this.props.memberList;
     let memberList = [];
 
     if (modalMemberList) {
@@ -52,8 +52,8 @@ class AddMember extends Component {
     }
 
     return (
-      <Modal open={this.props.modalOpen} onClose={this.closeAndReset} >
-        <Modal.Header>Add to Room <Label size='big'>{this.props.modalRoomName}</Label></Modal.Header>
+      <Modal open={this.props.modalOpen} onClose={this.closeAndReset} size="small">
+        <Modal.Header>Add to Room <Label size='big'>{this.props.roomName}</Label></Modal.Header>
         <Modal.Content>
           <Form >
             <Form.Field>
@@ -81,4 +81,4 @@ class AddMember extends Component {
   }
 }
 
-export default AddMember;
+export default ModalAddMember;

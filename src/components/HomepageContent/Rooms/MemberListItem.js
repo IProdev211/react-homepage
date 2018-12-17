@@ -6,7 +6,7 @@ class MemberListItem extends Component {
 
   render() {
 
-    const deleteHandler = this.props.deleteHandler;
+    const deleteMemberHandler = this.props.deleteMemberHandler;
     const member = this.props.member;
 
     return (
@@ -18,7 +18,7 @@ class MemberListItem extends Component {
             {member.user_email}
           </List.Description>
         </List.Content>
-        <Button icon floated="right" onClick={() => {deleteHandler(member.id, member.user_firstname + ' ' + member.user_lastname)}}>
+        <Button icon floated="right" onClick={() => {deleteMemberHandler(member.id, member.user_firstname + ' ' + member.user_lastname)}}>
           <Icon name='trash' />
         </Button>
       </List.Item>
