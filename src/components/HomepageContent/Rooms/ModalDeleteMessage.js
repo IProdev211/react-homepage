@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {Button, Icon, Modal} from 'semantic-ui-react';
 
 
-class ModalMessage extends Component {
+class ModalDeleteMessage extends Component {
 
 
   render() {
@@ -38,4 +38,4 @@ class ModalMessage extends Component {
   }
 }
 
-export default ModalMessage;
+export default ModalDeleteMessage;

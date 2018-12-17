@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
-import {Segment, Header} from "semantic-ui-react";
-
+import {Segment} from "semantic-ui-react";
 
 import AllRooms from './AllRooms';
 
@@ -11,10 +10,6 @@ class Rooms extends Component {
 
     return (
       <Segment style={{ padding: '2em 2em' }} vertical>
-
-        <Header as='h3' style={{ fontSize: '2em' }}>
-          Your Rooms
-        </Header>
 
         <AllRooms />
 

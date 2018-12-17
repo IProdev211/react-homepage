@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {Button, Form} from "semantic-ui-react";
+import {Button, Form, Header, Icon, Segment} from "semantic-ui-react";
 
 //-----------------------------------------------------------------------------
 
@@ -12,7 +12,9 @@ import auth from "../../../service/auth";
 
 import ModalAddMember from './ModalAddMember';
 
-import ModalMessage from './ModalMessage';
+import ModalDeleteMessage from './ModalDeleteMessage';
+
+import ModalNewRoom from './ModalNewRoom';
 
 import OneRoom from './OneRoom';
 
@@ -27,19 +29,19 @@ class AllRooms extends Component {
 
       rooms: [],
 
-      newRoomName: '',
-
       modalMemberOpen: false,
       modalMemberRoomId: null,
       modalMemberRoomName: '',
       modalMemberMemberList: [],
 
-      modalMessageOpen: false,
-      modalMessageHeader: '',
-      modalMessageContent: '',
-      modalMessageIcon: '',
-      modalMessageLabel: '',
-      modalMessageActionHandler: null,
+      modalDeleteMessageOpen: false,
+      modalDeleteMessageHeader: '',
+      modalDeleteMessageContent: '',
+      modalDeleteMessageIcon: '',
+      modalDeleteMessageLabel: '',
+      modalDeleteMessageActionHandler: null,
+
+      modalNewRoomOpen: false,
 
     };
 
@@ -48,21 +50,19 @@ class AllRooms extends Component {
     this.addMember = this.addMember.bind(this);
     
     this.getOwnRooms = this.getOwnRooms.bind(this);
-    this.inputChangeHandler = this.inputChangeHandler.bind(this);
     this.addRoom = this.addRoom.bind(this);
     this.deleteMember = this.deleteMember.bind(this);
 
     this.deleteRoom = this.deleteRoom.bind(this);
-    this.closeMessageModal = this.closeMessageModal.bind(this);
+    this.closeDeleteMessageModal = this.closeDeleteMessageModal.bind(this);
     this.openMessageModal = this.openMessageModal.bind(this);
+
+    this.openNewRoomModal = this.openNewRoomModal.bind(this);
+    this.closeNewRoomModal = this.closeNewRoomModal.bind(this);
 
   }
 
   //_----------------------------------------------------------------------
-
-  inputChangeHandler(evt, {name, value}) {
-    this.setState({[name]:value});
-  }
 
   getOwnRooms() {
     //TODO: just pass user_id
@@ -73,6 +73,16 @@ class AllRooms extends Component {
 
   componentWillMount() {
     this.getOwnRooms();
+  }
+
+  //_----------------------------------------------------------------------
+
+  openNewRoomModal() {
+    this.setState({modalNewRoomOpen: true});
+  }
+
+  closeNewRoomModal() {
+    this.setState({modalNewRoomOpen: false});
   }
 
   //_----------------------------------------------------------------------
@@ -103,17 +113,17 @@ class AllRooms extends Component {
   deleteMember(member_id, member_name) {
     this.openMessageModal('Remove member', 'Do you really want to remove the member', 'exclamation triangle', member_name,() => {
       apiService.deleteMember(member_id).then(() => {
-        this.closeMessageModal();
+        this.closeDeleteMessageModal();
         this.getOwnRooms();
       });
     });
   }
 
-
-  addRoom() {
+  addRoom(room_name) {
     //TODO: just pass user_id
-    apiService.newRoom(auth.user, this.state.newRoomName).then(() => {
-      this.setState({newRoomName: ''});
+    apiService.newRoom(auth.user, room_name).then(() => {
+      //this.setState({newRoomName: ''});
+      this.closeNewRoomModal();
       this.getOwnRooms();
     });
   }
@@ -121,7 +131,7 @@ class AllRooms extends Component {
   deleteRoom(room_id, room_name) {
     this.openMessageModal('Delete room', 'Do you really want to delete the room', 'exclamation triangle', room_name,() => {
       apiService.deleteRoom(room_id).then(() => {
-        this.closeMessageModal();
+        this.closeDeleteMessageModal();
         this.getOwnRooms();
       });
     });
@@ -130,11 +140,25 @@ class AllRooms extends Component {
   //_----------------------------------------------------------------------
 
   openMessageModal(header, content, icon, label, actionHandler) {
-    this.setState({modalMessageOpen: true, modalMessageHeader:header, modalMessageContent: content, modalMessageIcon: icon, modalMessageLabel: label, modalMessageActionHandler: actionHandler});
+    this.setState({
+      modalDeleteMessageOpen: true,
+      modalDeleteMessageHeader:header,
+      modalDeleteMessageContent: content,
+      modalDeleteMessageIcon: icon,
+      modalDeleteMessageLabel: label,
+      modalDeleteMessageActionHandler: actionHandler
+    });
   }
 
-  closeMessageModal() {
-    this.setState({modalMessageOpen: false, modalMessageHeader:'', modalMessageContent: '', modalMessageIcon: '', modalMessageLabel: '', modalMessageActionHandler:null});
+  closeDeleteMessageModal() {
+    this.setState({
+      modalDeleteMessageOpen: false,
+      modalDeleteMessageHeader:'',
+      modalDeleteMessageContent: '',
+      modalDeleteMessageIcon: '',
+      modalDeleteMessageLabel: '',
+      modalDeleteMessageActionHandler:null
+    });
   }
 
   //_----------------------------------------------------------------------
@@ -155,30 +179,40 @@ class AllRooms extends Component {
 
       <div>
 
-        {allRooms}
+        <Segment basic clearing>
+          <Header as='h3' style={{ fontSize: '2em' }} floated="left">
+            Your Rooms
+          </Header>
+          <Button floated='right' icon onClick={this.openNewRoomModal}>
+            <Icon name='plus' />
+          </Button>
+        </Segment>
 
-        <Form onSubmit={this.addRoom}>
-          <Form.Input name="newRoomName" value={this.state.newRoomName} onChange={this.inputChangeHandler} fluid label='Create Room' placeholder='Room name' />
-          <Button type='submit'>Submit</Button>
-        </Form>
+        {allRooms}
 
         <ModalAddMember
           modalOpen={this.state.modalMemberOpen}
           roomId={this.state.modalMemberRoomId}
           roomName={this.state.modalMemberRoomName}
           memberList={this.state.modalMemberMemberList}
-          closeHandler={this.closeMemberModal}
           actionHandler={this.addMember}
+          closeHandler={this.closeMemberModal}
         />
 
-        <ModalMessage
-          modalOpen={this.state.modalMessageOpen}
-          header={this.state.modalMessageHeader}
-          content={this.state.modalMessageContent}
-          icon={this.state.modalMessageIcon}
-          label={this.state.modalMessageLabel}
-          actionHandler={this.state.modalMessageActionHandler}
-          closeHandler={this.closeMessageModal}
+        <ModalDeleteMessage
+          modalOpen={this.state.modalDeleteMessageOpen}
+          header={this.state.modalDeleteMessageHeader}
+          content={this.state.modalDeleteMessageContent}
+          icon={this.state.modalDeleteMessageIcon}
+          label={this.state.modalDeleteMessageLabel}
+          actionHandler={this.state.modalDeleteMessageActionHandler}
+          closeHandler={this.closeDeleteMessageModal}
+        />
+
+        <ModalNewRoom
+          modalOpen={this.state.modalNewRoomOpen}
+          actionHandler={this.addRoom}
+          closeHandler={this.closeNewRoomModal}
         />
 
       </div>
