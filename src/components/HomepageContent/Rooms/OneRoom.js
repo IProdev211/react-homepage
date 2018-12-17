@@ -4,8 +4,8 @@ import {Button, Header, Icon, Segment} from "semantic-ui-react";
 
 import MemberList from './MemberList';
 
-
 class OneRoom extends Component {
+  
 
   render() {
 
@@ -15,7 +15,9 @@ class OneRoom extends Component {
       <Segment.Group >
         <Segment color='blue' clearing>
           <Header floated='left'>{room.name}</Header>
-          <Button floated='right' size="small">TODO: delete</Button>
+          <Button floated='right' size="small" icon onClick={() => this.props.deleteRoomHandler(room.id)}>
+            <Icon name='trash' />
+          </Button>
           <Button floated='right' size="small" icon onClick={() => this.props.modalHandler(room.id, room.name)}>
             <Icon name='plus' />
           </Button>

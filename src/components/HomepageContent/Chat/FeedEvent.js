@@ -8,7 +8,7 @@ class FeedEvent extends Component {
     const event = this.props.event;
 
     let dateString = '';
-    dateString += (event.diff_day) ? event.diff_days + ' day(s) ' : '';
+    dateString += (event.diff_day) ? event.diff_day + ' day(s) ' : '';
     dateString += (event.diff_hour) ? event.diff_hour + ' hour(s) ' : '';
     dateString += (event.diff_minute) ? event.diff_minute + ' minute(s) ' : '';
     dateString += (event.diff_second) ? event.diff_second + ' second(s) ' : '';

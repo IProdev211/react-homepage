@@ -105,12 +105,20 @@ function addMember(room_id, member_id) {
   });
 }
 
-
+function deleteRoom(room_id) {
+  return request({
+    url: '/deleteRoom',
+    method: 'POST',
+    data: {
+      room_id: room_id
+    }
+  });
+}
 
 
 const apiService = {
 
-  get, login, register, checkToken, getFeeds, newMessage, newRoom, getOwnRooms, deleteMember, addMember, getAddableMembers
+  get, login, register, checkToken, getFeeds, newMessage, newRoom, getOwnRooms, deleteMember, addMember, getAddableMembers, deleteRoom
 
 };
 

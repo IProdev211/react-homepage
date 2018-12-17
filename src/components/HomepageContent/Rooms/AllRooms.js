@@ -12,6 +12,8 @@ import auth from "../../../service/auth";
 
 import AddMember from './AddMember';
 
+import ModalMessage from './ModalMessage';
+
 import OneRoom from './OneRoom';
 
 //-----------------------------------------------------------------------------
@@ -32,6 +34,13 @@ class AllRooms extends Component {
       modalRoomName: '',
       modalMemberList: [],
 
+      modalMessageOpen: false,
+      modalMessageHeader: '',
+      modalMessageContent: '',
+      modalMessageOkHandler: null,
+
+
+
     };
 
     this.closeModal = this.closeModal.bind(this);
@@ -42,6 +51,12 @@ class AllRooms extends Component {
     this.changeHander = this.changeHander.bind(this);
     this.addRoom = this.addRoom.bind(this);
     this.deleteMember = this.deleteMember.bind(this);
+
+    this.deleteRoom = this.deleteRoom.bind(this);
+
+    this.closeModalMessage = this.closeModalMessage.bind(this);
+
+    this.openModalMessage = this.openModalMessage.bind(this);
 
   }
 
@@ -99,6 +114,33 @@ class AllRooms extends Component {
     });
   }
 
+  deleteRoom(room_id) {
+
+    this.openModalMessage('Löschen wollen?', 'sdfdsfdsfdsf', () => {
+      apiService.deleteRoom(room_id).then(() => {
+        this.setState({modalMessageOpen: false, modalMessageHeader:'', modalMessageContent: '', modalMessageOkHandler:null});
+        this.getOwnRooms();
+      });
+
+    });
+/*
+    apiService.deleteRoom(room_id).then(() => {
+      this.getOwnRooms();
+    });
+*/
+  }
+//_----------------------------------------------------------------------
+
+  openModalMessage(header, content, okHandler) {
+    this.setState({modalMessageOpen: true, modalMessageHeader:header, modalMessageContent: content, modalMessageOkHandler:okHandler});
+  }
+
+  closeModalMessage() {
+    this.setState({modalMessageOpen: false});
+  }
+
+
+
   //_----------------------------------------------------------------------
 
   render() {
@@ -109,6 +151,7 @@ class AllRooms extends Component {
         room={room}
         deleteHandler={this.deleteMember}
         modalHandler={this.openModal}
+        deleteRoomHandler={this.deleteRoom}
       />
     );
 
@@ -130,6 +173,14 @@ class AllRooms extends Component {
           modalMemberList={this.state.modalMemberList}
           closeModal={this.closeModal}
           addMember={this.addMember}
+        />
+
+        <ModalMessage
+          modalOpen={this.state.modalMessageOpen}
+          closeHandler={this.closeModalMessage}
+          okHandler={this.state.modalMessageOkHandler}
+          header={this.state.modalMessageHeader}
+          content={this.state.modalMessageContent}
         />
 
       </div>
