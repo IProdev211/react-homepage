@@ -84,12 +84,12 @@ function deleteMember(member_id) {
   });
 }
 
-function getMembers(user_id) {
+function getAddableMembers(room_id) {
   return request({
-    url: '/getMembers',
+    url: '/getAddableMembers',
     method: 'POST',
     data: {
-      user_id: user_id
+      room_id: room_id
     }
   });
 }
@@ -109,7 +109,9 @@ function addMember(room_id, member_id) {
 
 
 const apiService = {
-  get, login, register, checkToken, getFeeds, newMessage, newRoom, getOwnRooms, deleteMember, getMembers, addMember
+
+  get, login, register, checkToken, getFeeds, newMessage, newRoom, getOwnRooms, deleteMember, addMember, getAddableMembers
+
 };
 
 export default apiService;

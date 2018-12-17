@@ -31,12 +31,7 @@ class Chat extends Component {
   }
   
   submitHandler() {
-    console.log(this.state.message);
-
-    let user = auth.user;
-
     apiService.newMessage(auth.user, this.state.message);
-
   }
 
   render() {

@@ -10,7 +10,7 @@ import Home from './HomepageContent/Home/Home';
 import Public from "./HomepageContent/Public/Public";
 
 import Chat from "./HomepageContent/Chat/Chat";
-import Room from "./HomepageContent/Room/Room";
+import Rooms from "./HomepageContent/Rooms/Rooms";
 
 import Login from "./HomepageContent/Login/Login";
 import Register from "./HomepageContent/Register/Register";
@@ -21,6 +21,7 @@ import PrivateRoute from '../service/PrivateRoute';
 
 
 const HomepageLayout = () => (
+
   <ResponsiveContainer>
 
     <Route exact path="/" component={Home} />
@@ -32,7 +33,7 @@ const HomepageLayout = () => (
     <Route path="/register" component={Register} />
 
 
-    <PrivateRoute path="/room" component={Room} />
+    <PrivateRoute path="/rooms" component={Rooms} />
     <PrivateRoute path="/chat" component={Chat} />
 
 
