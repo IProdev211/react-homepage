@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 
 import {Segment, Header, Form, Button} from "semantic-ui-react";
 
-import Websocket from 'react-websocket';
 
 import apiService from '../../../service/apiService';
+import auth from '../../../service/auth';
+
+
+import SecureWebsocket from '../../../service/SecureWebsocket';
+
 
 import FeedList from './FeedList';
 
-import auth from '../../../service/auth';
 
 class Chat extends Component {
 
@@ -21,8 +24,6 @@ class Chat extends Component {
     };
 
     this.getAllFeeds = this.getAllFeeds.bind(this);
-
-
 
   }
 
@@ -47,14 +48,9 @@ class Chat extends Component {
     });
   }
 
-
-
   render() {
 
     let events = this.state.events;
-
-
-
 
     return (
       <Segment style={{ padding: '2em 2em' }} vertical>
@@ -63,27 +59,19 @@ class Chat extends Component {
         </Header>
 
 
-
         <FeedList events={events}/>
 
 
         <Form onSubmit={this.submitHandler.bind(this)}>
-
-
           <Form.TextArea placeholder='Write something...' value={this.state.message} onChange={this.changeHandler.bind(this)}/>
-
           <Button type='submit'>Submit</Button>
         </Form>
 
 
-
-        <Websocket
-          url='ws://localhost:5000/sock/'
-          onMessage={(msg) => {
-            console.log(msg);
-            this.getAllFeeds();
-
-            }}
+        <SecureWebsocket
+          url='ws://localhost:5000/api/socks/'
+          onMessage={this.getAllFeeds}
+          reconnect={true}
         />
 
 
