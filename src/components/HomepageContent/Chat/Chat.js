@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import {Segment, Header, Form, Button} from "semantic-ui-react";
 
+import Websocket from 'react-websocket';
+
 import apiService from '../../../service/apiService';
 
 import FeedList from './FeedList';
@@ -16,14 +18,22 @@ class Chat extends Component {
     this.state = {
       message: '',
       events: [],
-    }
+    };
+
+    this.getAllFeeds = this.getAllFeeds.bind(this);
+
+
 
   }
 
-  componentWillMount() {
+  getAllFeeds() {
     apiService.getFeeds().then(events => {
       this.setState({ events: events });
     });
+  }
+
+  componentWillMount() {
+    this.getAllFeeds();
   }
   
   changeHandler(evt, target) {
@@ -31,8 +41,13 @@ class Chat extends Component {
   }
   
   submitHandler() {
-    apiService.newMessage(auth.user, this.state.message);
+    apiService.newMessage(auth.user, this.state.message).then(() => {
+      this.setState({message:''});
+     // this.getAllFeeds();
+    });
   }
+
+
 
   render() {
 
@@ -47,6 +62,8 @@ class Chat extends Component {
           Chat
         </Header>
 
+
+
         <FeedList events={events}/>
 
 
@@ -58,6 +75,16 @@ class Chat extends Component {
           <Button type='submit'>Submit</Button>
         </Form>
 
+
+
+        <Websocket
+          url='ws://localhost:5000/sock/'
+          onMessage={(msg) => {
+            console.log(msg);
+            this.getAllFeeds();
+
+            }}
+        />
 
 
       </Segment>
