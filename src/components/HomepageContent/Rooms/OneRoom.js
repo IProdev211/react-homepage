@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-import {Button, Header, Icon, Segment} from "semantic-ui-react";
+import {Button, Header, Icon, Segment, Label} from "semantic-ui-react";
 
 import MemberList from './MemberList';
 
@@ -11,10 +11,16 @@ class OneRoom extends Component {
 
     const room = this.props.room;
 
+    console.log(room);
+
     return (
       <Segment.Group >
         <Segment color='blue' clearing>
-          <Header floated='left'>{room.name}</Header>
+          <Header floated='left'>{room.name}
+            <Label>
+              <Icon name='users' />{room.count}
+            </Label>
+          </Header>
           <Button floated='right' size="small" icon onClick={() => this.props.deleteRoomHandler(room.id, room.name)}>
             <Icon name='trash' />
           </Button>

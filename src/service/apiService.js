@@ -116,9 +116,45 @@ function deleteRoom(room_id) {
 }
 
 
+function getChatRooms(user_id) {
+  return request({
+    url: '/getChatRooms',
+    method: 'POST',
+    data: {
+      user_id: user_id
+    }
+  });
+}
+
+function getChatFeeds(room_id) {
+  return request({
+    url: '/getChatFeeds',
+    method: 'POST',
+    data: {
+      room_id: room_id
+    }
+  });
+}
+
+function newChatMessage(user_id, room_id, message, content = 'Posted new Message') {
+  return request({
+    url: '/newChatMessage',
+    method: 'POST',
+    data: {
+      user_id: user_id,
+      room_id: room_id,
+      message: message,
+      content: content
+    }
+  });
+}
+
+
 const apiService = {
 
-  get, login, register, checkToken, getFeeds, newMessage, newRoom, getOwnRooms, deleteMember, addMember, getAddableMembers, deleteRoom
+  get, login, register, checkToken, getFeeds, newMessage, newRoom, getOwnRooms, deleteMember, addMember, getAddableMembers, deleteRoom,
+
+  getChatRooms, getChatFeeds, newChatMessage
 
 };
 

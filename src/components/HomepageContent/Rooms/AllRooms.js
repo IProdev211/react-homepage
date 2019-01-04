@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {Button, Form, Header, Icon, Segment} from "semantic-ui-react";
+import {Button, Header, Icon, Segment} from "semantic-ui-react";
 
 //-----------------------------------------------------------------------------
 

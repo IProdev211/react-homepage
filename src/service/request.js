@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import {session} from './Session';
 
+//TODO: replace localhost with something cool
 const client = axios.create({
   baseURL: 'http://localhost:5000/api'
 });

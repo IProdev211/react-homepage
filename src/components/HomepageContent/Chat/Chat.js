@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 
-import {Segment, Header, Form, Button} from "semantic-ui-react";
-
-
-import apiService from '../../../service/apiService';
-import auth from '../../../service/auth';
-
+import { Grid } from "semantic-ui-react";
 
 import SecureWebsocket from '../../../service/SecureWebsocket';
 
 
-import FeedList from './FeedList';
+import AllChatRooms from './AllChatRooms';
+import AllChatFeeds from './AllChatFeeds';
+
 
 
 class Chat extends Component {
@@ -19,63 +16,50 @@ class Chat extends Component {
     super(props);
 
     this.state = {
-      message: '',
-      events: [],
+      activeRoom: null,
+      dirty: false,
     };
 
-    this.getAllFeeds = this.getAllFeeds.bind(this);
+    this.changeActiveRoom = this.changeActiveRoom.bind(this);
+    //this.updateComponent = this.updateComponent.bind(this);
 
   }
 
-  getAllFeeds() {
-    apiService.getFeeds().then(events => {
-      this.setState({ events: events });
-    });
+  changeActiveRoom(room) {
+    this.setState({activeRoom: room, dirty: false});
   }
 
-  componentWillMount() {
-    this.getAllFeeds();
+  shouldComponentUpdate(nextProps, nextState) {
+    return (this.state.activeRoom !== nextState.activeRoom) || (this.state.dirty !== nextState.dirty);
   }
-  
-  changeHandler(evt, target) {
-    this.setState({message:target.value});
-  }
-  
-  submitHandler() {
-    apiService.newMessage(auth.user, this.state.message).then(() => {
-      this.setState({message:''});
-     // this.getAllFeeds();
-    });
-  }
+
 
   render() {
 
-    let events = this.state.events;
 
     return (
-      <Segment style={{ padding: '2em 2em' }} vertical>
-        <Header as='h3' style={{ fontSize: '2em' }}>
-          Chat
-        </Header>
 
+        <div>
 
-        <FeedList events={events}/>
+          <Grid style={{ padding: '2em 2em' }}>
+            <Grid.Column width={11}>
+              <AllChatFeeds activeRoom={this.state.activeRoom} dirty={this.state.dirty}/>
+            </Grid.Column>
+            <Grid.Column width={5}>
+              <AllChatRooms changeRoomHandler={this.changeActiveRoom} activeRoom={this.state.activeRoom} dirty={this.state.dirty}/>
+            </Grid.Column>
+          </Grid>
 
+          {/* --------------------------------------------------------------------------------------------------------- */}
 
-        <Form onSubmit={this.submitHandler.bind(this)}>
-          <Form.TextArea placeholder='Write something...' value={this.state.message} onChange={this.changeHandler.bind(this)}/>
-          <Button type='submit'>Submit</Button>
-        </Form>
+          <SecureWebsocket
+            url='ws://localhost:5000/api/socks/'
+            onMessage={() => this.setState({dirty:true})}
+            reconnect={true}
+          />
 
+        </div>
 
-        <SecureWebsocket
-          url='ws://localhost:5000/api/socks/'
-          onMessage={this.getAllFeeds}
-          reconnect={true}
-        />
-
-
-      </Segment>
     );
   }
 

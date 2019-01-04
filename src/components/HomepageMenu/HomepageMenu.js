@@ -16,7 +16,7 @@ const HomepageMenu = ({fixed, desktop, location}) => (
         <Menu.Item as={Link} to="/rooms" active={location.pathname === '/rooms'}>Rooms</Menu.Item>
         <Menu.Item as={Link} to="/chat" active={location.pathname === '/chat'}>Chat</Menu.Item>
 
-        {desktop ? (
+      {desktop ? (
             <Menu.Item position='right'>
               <AuthButton fixed={fixed} />
             </Menu.Item>
