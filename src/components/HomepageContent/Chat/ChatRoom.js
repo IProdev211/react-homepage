@@ -9,6 +9,17 @@ class ChatRoom extends Component {
 
     let changeRoomHandler = (this.props.changeRoomHandler) ? () => this.props.changeRoomHandler(chatRoom) : null;
 
+    let complexElements = (this.props.complex) ? (
+      <div>
+        <Button floated='right' size="small" icon >
+          <Icon name='edit' /> {chatRoom.message_count}
+        </Button>
+        <Button floated='right' size="small" icon >
+          <Icon name='users' /> {chatRoom.member_count}
+        </Button>
+      </div>
+    ) : null;
+
     return (
         <Segment
           color={(this.props.active) ? 'blue' : null}
@@ -20,12 +31,9 @@ class ChatRoom extends Component {
               {chatRoom.id}
             </Label>
           </Header>
-          <Button floated='right' size="small" icon >
-            <Icon name='edit' /> {chatRoom.message_count}
-          </Button>
-          <Button floated='right' size="small" icon >
-            <Icon name='users' /> {chatRoom.member_count}
-          </Button>
+
+          {complexElements}
+
         </Segment>
     );
   }

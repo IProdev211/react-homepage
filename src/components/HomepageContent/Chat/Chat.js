@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { Grid } from "semantic-ui-react";
 
+import {config} from '../../../Config';
+
 import SecureWebsocket from '../../../service/SecureWebsocket';
 
 
@@ -37,6 +39,7 @@ class Chat extends Component {
   render() {
 
 
+
     return (
 
         <div>
@@ -53,7 +56,7 @@ class Chat extends Component {
           {/* --------------------------------------------------------------------------------------------------------- */}
 
           <SecureWebsocket
-            url='ws://localhost:5000/api/socks/'
+            url={config.apiServer.socketUrl}
             onMessage={() => this.setState({dirty:true})}
             reconnect={true}
           />

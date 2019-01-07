@@ -13,6 +13,8 @@ class FeedEvent extends Component {
     dateString += (feed.diff_minute) ? feed.diff_minute + ' minute(s) ' : '';
     dateString += (feed.diff_second) ? feed.diff_second + ' second(s) ' : '';
 
+    dateString = (dateString.length === 0) ? 'just now' : dateString + ' ago';
+
     let textBlock = (feed.text) ?  <Feed.Extra text>{feed.text}</Feed.Extra> : null;
 
     let imgBlock = (feed.image) ?  <Feed.Extra images><img src={feed.image} alt="img-content"/></Feed.Extra> : null;
@@ -25,7 +27,7 @@ class FeedEvent extends Component {
           <Feed.Summary>
             <Label>{feed.user_firstname} {feed.user_lastname}</Label> {feed.content}
             {/*<Feed.Date>{feed.date}</Feed.Date>*/}
-            <Feed.Date>{dateString} ago</Feed.Date>
+            <Feed.Date>{dateString}</Feed.Date>
           </Feed.Summary>
 
             {imgBlock}

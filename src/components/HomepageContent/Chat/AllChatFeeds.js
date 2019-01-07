@@ -57,7 +57,7 @@ class AllChatFeeds extends Component {
       </Form>
     ) : null;
 
-    let chatRoomHeader = (this.props.activeRoom) ? <ChatRoom active={true} chatRoom={this.props.activeRoom}/> : null;
+    let chatRoomHeader = (this.props.activeRoom) ? <ChatRoom active={true} chatRoom={this.props.activeRoom} complex={true} /> : null;
 
    //console.log(this.state.message);
 
