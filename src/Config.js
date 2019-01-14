@@ -2,7 +2,9 @@
 
 class Config {
 
-  ipAddress= '10.4.51.222';
+//  ipAddress= '10.4.51.222';
+  ipAddress= 'localhost';
+
   port= 5000;
 
   apiServer = {
